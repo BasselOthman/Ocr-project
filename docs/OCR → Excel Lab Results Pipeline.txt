@@ -1,0 +1,174 @@
+OCR → Excel Lab Results Pipeline (Developer Checklist)
+
+Purpose:
+This document is a PERSONAL, PRACTICAL checklist to follow while coding.
+It focuses on WHAT needs to be done, in order, with zero academic wording.
+
+==================================================
+STEP 0 – Understand the Goal
+==================================================
+Input:
+- PDF or image of lab results
+- Arabic + English mixed text
+
+Output:
+- Excel file
+- Each lab test correctly matched with:
+  (Test Name → Value → Unit → Reference Range)
+
+Main risk to avoid:
+- Wrong value assigned to the wrong test
+
+==================================================
+STEP 1 – Input Preparation
+==================================================
+- Accept PDF or image
+- If PDF:
+  - Convert each page to an image
+- Make sure images are:
+  - Clear
+  - Not rotated
+  - High resolution (≈300 DPI)
+
+==================================================
+STEP 2 – OCR Using DOCTr
+==================================================
+- Run DOCTr on each page
+- Extract:
+  - Text
+  - Bounding boxes
+  - Line/group information
+
+Expected issues (normal):
+- Split test names
+- Missing symbols
+- Decimal mistakes
+- Arabic/English mixed
+
+Do NOT fix anything yet.
+
+==================================================
+STEP 3 – Collect OCR Output
+==================================================
+Store OCR results per page:
+- Text content
+- X/Y coordinates
+- Page number
+
+Keep everything raw for now.
+==================================================
+STEP 4 – Rebuild Lines & Rows
+==================================================
+This is CRITICAL.
+
+- Group words by:
+  - Same horizontal line (Y-axis proximity)
+- Combine words into full lines
+- Combine lines into rows
+
+Goal:
+Each row should represent ONE test.
+
+==================================================
+STEP 5 – Detect Table vs Text
+==================================================
+- Ignore headers, footers, doctor names, comments
+- Focus on rows that contain:
+  - Test name + number
+
+==================================================
+STEP 6 – Extract Medical Fields
+==================================================
+From each row, extract:
+- Test name
+- Numeric value
+- Unit
+- Reference range (if exists)
+
+Use:
+- Regex for numbers
+- Known unit list
+- Known test name list (Arabic + English)
+
+==================================================
+STEP 7 – Normalize Text
+==================================================
+- Convert Arabic digits → English digits
+- Fix spacing issues
+- Normalize symbols (% / . / -)
+
+==================================================
+STEP 8 – Standardize Test Names
+==================================================
+Examples:
+- SGPT → ALT
+- SGOT → AST
+- Random Blood Glucose → RBG
+
+Use mapping dictionary.
+
+==================================================
+STEP 9 – Validate Values
+==================================================
+For each test:
+- Value must be numeric
+- Unit must match test
+- Value must be reasonable
+- Range must be logical (low < high)
+
+If not:
+- Flag as OCR_ERROR
+
+==================================================
+STEP 10 – Flag Results
+==================================================
+Compare value with reference range:
+- Low
+- Normal
+- High
+- Unknown (if missing data)
+
+==================================================
+STEP 11 – Build Final Data Structure
+==================================================
+For each test store:
+- Test Name
+- Value
+- Unit
+- Reference Range
+- Flag
+- Page Number
+
+==================================================
+STEP 12 – Export to Excel
+==================================================
+Create Excel with columns:
+- Test Name
+- Value
+- Unit
+- Reference Range
+- Flag
+- Page
+
+==================================================
+STEP 13 – Error Handling
+==================================================
+- Never silently fail
+- Always flag uncertainty
+- Keep raw OCR text if needed for debugging
+
+==================================================
+STEP 14 – Manual Testing
+==================================================
+Test with:
+- Clean reports
+- Messy reports
+- Arabic-heavy reports
+Verify:
+- No value is matched to wrong test
+
+==================================================
+FINAL RULE
+==================================================
+Wrong extraction is worse than missing extraction.
+Always prefer FLAG over GUESS.
