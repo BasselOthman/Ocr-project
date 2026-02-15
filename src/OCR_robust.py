@@ -11,6 +11,7 @@ import json
 import difflib
 import easyocr
 from pdf2image import convert_from_path
+from firebase_service import FirebaseService
 
 # ================= PATH CONFIGURATION =================
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -29,7 +30,7 @@ DEBUG_FILE = os.path.join(LOGS_DIR, "debug_info.txt")
 
 class PatientManager:
     """
-    Manages synthetic Patient IDs based on normalized patient names.
+    Manages synthetic Patient IDs.
     Persists data to patient_registry.json.
     """
     def __init__(self, registry_path=None):
@@ -137,7 +138,7 @@ def fix_spacing(text):
     return " ".join(new_words)
 
 def cleanup_name(name):
-    # Remove "x10..." scientific notation noise
+    # Remove scientific notation noise
     name = re.sub(r'\s*x10.*', '', name, flags=re.IGNORECASE)
     
     # Remove trailing numbers, percentages, or value-like debris
@@ -320,7 +321,7 @@ class RobustOCR:
 
     def is_noise(self, test_name):
         """
-        Returns True if the test name looks like noise.
+        True if test name looks like noise.
         """
         if not test_name: return True
         test_name = test_name.strip()
@@ -447,7 +448,7 @@ class RobustOCR:
 
     def calculate_adaptive_threshold(self, pages):
         """
-        Calculates median text height for adaptive row grouping.
+        Median text height for adaptive row grouping.
         """
         heights = []
         for page in pages:
@@ -744,10 +745,10 @@ class RobustOCR:
 
 if __name__ == "__main__":
     
-    # Initialize Patient Manager
+    # Patient Manager
     patient_manager = PatientManager()
     
-    # Collect PDF files
+    # Scan Input
     if len(sys.argv) > 1:
         target_file = sys.argv[1]
         if os.path.exists(target_file):
@@ -771,6 +772,13 @@ if __name__ == "__main__":
     
     ocr = RobustOCR()
     
+    # Firebase Setup
+    try:
+        firebase_service = FirebaseService()
+    except Exception as e:
+        print(f"Firebase Init Failed: {e}")
+        firebase_service = None
+    
     master_results = []
     patient_registry = [] # List of tuples/dicts
     
@@ -783,6 +791,28 @@ if __name__ == "__main__":
         
         if file_results:
             master_results.extend(file_results)
+            
+            # --- FIREBASE UPLOAD ---
+            # Structure data for this specific report
+            report_id = f"RPT_{patient_info[0]}_{int(pd.Timestamp.now().timestamp())}"
+            
+            p_data = {
+                "id": patient_info[0],
+                "name": patient_info[1]
+            }
+            
+            r_data = {
+                "id": report_id,
+                "sourceFile": pdf_file,
+                "timestamp": str(pd.Timestamp.now())
+            }
+            
+            # Use the new Firebase Service
+            # Note: We initialized 'firebase_service' outside the loop below
+            if 'firebase_service' in locals():
+                print(f"Uploading report {report_id} to Firebase...")
+                firebase_service.upload_report(p_data, r_data, file_results)
+            # -----------------------
             
         patient_registry.append({
             "Patient_ID": patient_info[0],

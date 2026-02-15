@@ -15,7 +15,7 @@ os.makedirs(OUTPUT_FOLDER, exist_ok=True)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB max upload
 
-# Initialize OCR and Patient Manager once
+# Init OCR & Patient Sync
 ocr = RobustOCR()
 patient_manager = PatientManager()
 
@@ -31,7 +31,7 @@ def upload_report():
         
     if file:
         filename = secure_filename(file.filename)
-        # Ensure unique filename to avoid overwrites
+        # Unique filename
         base, ext = os.path.splitext(filename)
         import time
         unique_filename = f"{base}_{int(time.time())}{ext}"
@@ -41,7 +41,7 @@ def upload_report():
         try:
             # Process the image
             print(f"Processing upload: {filepath}")
-            # Note: OCR_robust expects a file path or list of paths
+            # Note: OCR_robust expects a file path or list
             file_results, patient_info = ocr.process_document(filepath, patient_manager)
             
             if not file_results:
