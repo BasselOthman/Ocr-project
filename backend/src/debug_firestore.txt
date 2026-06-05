@@ -1,0 +1,26 @@
+--- PATIENT ID: 10001 ---
+Data: {'lastUpdated': DatetimeWithNanoseconds(2026, 2, 15, 13, 54, 10, 181828, tzinfo=datetime.timezone.utc), 'name': 'باسل رامى محمد عثمان'}
+  -> REPORT: RPT_10001_1771163613
+     File: Bassel_results.pdf
+     Date: 2026-02-15 13:53:34.896203+00:00
+  -> REPORT: RPT_10001_1771163650
+     File: Bassel_results2.pdf
+     Date: 2026-02-15 13:54:10.485310+00:00
+  Total reports: 2
+
+--- PATIENT ID: 10002 ---
+Data: {'lastUpdated': DatetimeWithNanoseconds(2026, 2, 15, 13, 55, 43, 529404, tzinfo=datetime.timezone.utc), 'name': 'اسلام هشام محمد'}
+  -> REPORT: RPT_10002_1771163743
+     File: Tests-results-60724507178.pdf
+     Date: 2026-02-15 13:55:43.797663+00:00
+  Total reports: 1
+
+--- PATIENT ID: feDPHIDgntPNuVEMpQ23dpuC6xU2 ---
+Data: {'lastUpdated': DatetimeWithNanoseconds(2026, 3, 13, 5, 25, 9, 875766, tzinfo=datetime.timezone.utc), 'name': 'باسل رامى محمد عثمان'}
+  Total reports: 0
+
+--- PATIENT ID: oUh9J75PyGS90XsVyUCvOKRN9kE2 ---
+Data: {'lastUpdated': DatetimeWithNanoseconds(2026, 3, 11, 7, 7, 27, 745776, tzinfo=datetime.timezone.utc), 'name': 'باسل رامى محمد عثمان'}
+  Total reports: 0
+
+TOTAL PATIENTS SCANNED: 4

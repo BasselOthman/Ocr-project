@@ -1,0 +1,8 @@
+{
+  "anemia": 0.5,
+  "diabetes": 0.5,
+  "hyperlipidemia": 0.5,
+  "kidney": 0.5,
+  "liver": 0.5,
+  "thyroid": 0.5
+}

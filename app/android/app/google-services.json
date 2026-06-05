@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "657134555478",
+    "project_id": "medical-ai-database",
+    "storage_bucket": "medical-ai-database.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:657134555478:android:5832cdfa6ed8c876b0c6f7",
+        "android_client_info": {
+          "package_name": "com.example.gp_app_fixed"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "657134555478-kj812rtfac4i3q1fjaeu5n19gkl8t89d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCA5VjTxbiQs7soMxPpCfjF_4drCOW5ruY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "657134555478-kj812rtfac4i3q1fjaeu5n19gkl8t89d.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "657134555478-7bddn6mv78mjruhk7rj6q03118lo2emt.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.gpAppFixed"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:657134555478:android:94eaac9b9e4c60cab0c6f7",
+        "android_client_info": {
+          "package_name": "samsung.m31"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "657134555478-kj812rtfac4i3q1fjaeu5n19gkl8t89d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCA5VjTxbiQs7soMxPpCfjF_4drCOW5ruY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "657134555478-kj812rtfac4i3q1fjaeu5n19gkl8t89d.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "657134555478-7bddn6mv78mjruhk7rj6q03118lo2emt.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.gpAppFixed"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

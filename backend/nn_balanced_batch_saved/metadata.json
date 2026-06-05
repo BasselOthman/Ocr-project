@@ -1,0 +1,5 @@
+{
+  "input_dim": 86,
+  "num_outputs": 6,
+  "batch_size_train": 256
+}

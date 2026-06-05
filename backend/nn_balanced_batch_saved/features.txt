@@ -1,0 +1,86 @@
+% Hemoglobin A1c
+Alanine Aminotransferase (ALT)
+Albumin
+Alkaline Phosphatase
+Asparate Aminotransferase (AST)
+Bilirubin, Direct
+Bilirubin, Total
+Cholesterol Ratio (Total/HDL)
+Cholesterol, HDL
+Cholesterol, LDL, Calculated
+Cholesterol, LDL, Measured
+Cholesterol, Total
+Creatinine
+Creatinine, Serum
+Estimated GFR (CKD- EPI 2021)
+Estimated GFR (CKD- EPI Refit)
+Ferritin
+Gamma Glutamyltransferase
+Glucose
+Hematocrit
+Hemoglobin
+Iron
+Iron Binding Capacity, Total
+MCH
+MCHC
+MCV
+Platelet Count
+Protein, Total
+RDW
+Red Blood Cells
+Thyroid Stimulating Hormone
+Thyroxine (T4)
+Thyroxine (T4), Free
+Triglycerides
+Triiodothyronine (T3)
+Urea Nitrogen
+WBC Count
+eAG
+gender
+anchor_age
+anchor_year
+height_cm
+weight_kg
+% Hemoglobin A1c_missing
+Alanine Aminotransferase (ALT)_missing
+Albumin_missing
+Alkaline Phosphatase_missing
+Asparate Aminotransferase (AST)_missing
+Bilirubin, Direct_missing
+Bilirubin, Total_missing
+Cholesterol Ratio (Total/HDL)_missing
+Cholesterol, HDL_missing
+Cholesterol, LDL, Calculated_missing
+Cholesterol, LDL, Measured_missing
+Cholesterol, Total_missing
+Creatinine_missing
+Creatinine, Serum_missing
+Estimated GFR (CKD- EPI 2021)_missing
+Estimated GFR (CKD- EPI Refit)_missing
+Ferritin_missing
+Gamma Glutamyltransferase_missing
+Glucose_missing
+Hematocrit_missing
+Hemoglobin_missing
+Iron_missing
+Iron Binding Capacity, Total_missing
+MCH_missing
+MCHC_missing
+MCV_missing
+Platelet Count_missing
+Protein, Total_missing
+RDW_missing
+Red Blood Cells_missing
+Thyroid Stimulating Hormone_missing
+Thyroxine (T4)_missing
+Thyroxine (T4), Free_missing
+Triglycerides_missing
+Triiodothyronine (T3)_missing
+Urea Nitrogen_missing
+WBC Count_missing
+eAG_missing
+gender_missing
+anchor_age_missing
+anchor_year_missing
+height_cm_missing
+weight_kg_missing
