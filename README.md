@@ -3,7 +3,7 @@
 A comprehensive cloud-native system designed to digitize, interpret, and manage medical laboratory reports.
 
 ## Overview
-This platform bridges the gap between raw medical PDFs and actionable patient data. It leverages advanced Optical Character Recognition (OCR) to extract tabular data from lab reports, standardizes the results using LOINC codes, and securely synchronizes structured medical data with the cloud. Both doctors and patients can access this structured data through a cross-platform mobile application, enriched with AI-generated clinical summaries and automated specialist recommendations. 
+This platform bridges the gap between raw medical PDFs and actionable patient data. It leverages advanced Optical Character Recognition (OCR) to extract tabular data from lab reports, standardizes the results using LOINC codes, and securely synchronizes structured medical data with the cloud. Both doctors and patients can securely access structured medical records through a cross-platform Flutter application featuring AI-powered clinical summaries, specialist recommendations, and longitudinal biomarker tracking.
 
 Patients and healthcare providers can monitor longitudinal biomarker trends through interactive visualizations, enabling better follow-up and early detection of health changes.
 
@@ -22,7 +22,7 @@ Data Cleaning
 LOINC Mapping
  │
  ▼
-LLM Analysis
+AI Interpretation
  │
  ▼
 Firestore
@@ -36,7 +36,7 @@ Firestore
 2. **AI-Powered Clinical Summaries:** Integrates with Large Language Models (LLMs) to generate easy-to-understand, bilingual (English & Arabic) explanations of lab results.
 3. **Automated Doctor Recommendations:** Analyzes biomarker deviations to intelligently recommend relevant medical specialists (e.g., Endocrinologist, Hematologist).
 4. **Historical Trends:** Interactive charts and visualizations allow patients to track biomarker progress over time.
-5. **Real-Time Cloud Sync:** Fully integrated with Google Firebase Firestore for secure, instant data synchronization between the backend and mobile clients.
+5. **Real-Time Cloud Sync:** Fully integrated with Google Firebase Authentication and Firestore for secure, instant data synchronization between the backend and mobile clients.
 6. **Bilingual Mobile Application:** A modern Flutter application supporting both English and Arabic.
 7. **Biomarker Standardization:** Normalizes varied test names, maps them to standard LOINC codes, and unifies measurement units.
 8. **Automated Document Generation:** Generates structured Word documents (`.docx`) and JSON exports for external record keeping.
@@ -52,8 +52,8 @@ Firestore
 │   └── pubspec.yaml
 ├── backend/
 │   ├── src/
-│   ├── docs/
-│   └── requirements.txt
+│   │   └── requirements.txt
+│   └── docs/
 ├── .gitignore
 ├── LICENSE
 └── README.md
@@ -67,7 +67,7 @@ Firestore
 | **Backend** | Python, Flask |
 | **OCR** | Doctr, EasyOCR |
 | **AI** | Gemini/OpenAI API |
-| **Database** | Firebase Firestore |
+| **Database** | Firebase Authentication & Firestore |
 | **Visualization** | FL Chart |
 | **Documents** | python-docx |
 
