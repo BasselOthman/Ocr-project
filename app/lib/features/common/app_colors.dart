@@ -1,30 +1,41 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  // Lighter, more vibrant dark blues based on user feedback
-  static const Color primary = Color(0xFF003366); // Rich but bright blue
-  static const Color primaryDark = Color(0xFF001F3F);
-  static const Color secondary = Color(0xFF0075FF); // Vibrant primary blue
-  static const Color accent = Color(0xFF00D1FF); // Cyan/Teal accent
-  
-  static const Color background = Color(0xFF0F172A); // Slate dark background
-  
-  static const Color textLight = Color(0xFFF1F5F9); // Off-white for text
-  static const Color textMuted = Color(0xFF94A3B8); // Muted grey for subtitles
-  
+  // Shared
+  static const Color accent = Color(
+    0xFF1877F2,
+  ); // Facebook blue / Instagram blue hint
+  static const Color secondary = Color(0xFF0095F6); // Instagram blue
   static const Color error = Color(0xFFFF4D4F);
   static const Color success = Color(0xFF00E676);
 
-  // Helper gradients
-  static const LinearGradient deepBlueGradient = LinearGradient(
-    colors: [Color(0xFF003366), Color(0xFF00509E), Color(0xFF0075FF)],
-    begin: Alignment.topLeft,
-    end: Alignment.bottomRight,
-  );
-  
+  // Light Mode
+  static const Color lightBackground = Color(0xFFFAFAFA);
+  static const Color lightCard = Color(0xFFFFFFFF);
+  static const Color lightText = Color(0xFF262626);
+  static const Color lightTextMuted = Color(0xFF8E8E8E);
+  static const Color lightDivider = Color(0xFFDBDBDB);
+
+  // Dark Mode
+  static const Color darkBackground = Color(0xFF000000);
+  static const Color darkCard = Color(0xFF121212);
+  static const Color darkText = Color(0xFFFAFAFA);
+  static const Color darkTextMuted = Color(0xFFA8A8A8);
+  static const Color darkDivider = Color(0xFF363636);
+
+  // Fallbacks for backward compatibility
+  static const Color primary = accent;
+  static const Color primaryDark = darkCard;
+  static const Color background = darkBackground;
+  static const Color textLight = darkText;
+  static const Color textMuted = darkTextMuted;
+
+  // Simple hint of blue gradient if needed somewhere
   static const LinearGradient meshGradient = LinearGradient(
-    colors: [Color(0xFF00509E), Color(0xFF0075FF), Color(0xFF00D1FF)],
+    colors: [Color(0xFF1877F2), Color(0xFF0095F6)],
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
   );
+
+  static const LinearGradient deepBlueGradient = meshGradient;
 }

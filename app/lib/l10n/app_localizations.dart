@@ -919,6 +919,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Data is localized on Firebase.'**
   String get dataLocalized;
+
+  /// No description provided for @awaitingDoctorReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Awaiting Doctor Review'**
+  String get awaitingDoctorReview;
+
+  /// No description provided for @aiAnalysisWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'This AI-generated analysis is preliminary and requires doctor validation. Please consult your physician for final medical decisions.'**
+  String get aiAnalysisWarning;
 }
 
 class _AppLocalizationsDelegate

@@ -10,8 +10,8 @@ class AnimatedScaleButton extends StatefulWidget {
     super.key,
     required this.onTap,
     required this.child,
-    this.scaleDownTo = 0.95,
-    this.duration = const Duration(milliseconds: 150),
+    this.scaleDownTo = 0.98,
+    this.duration = const Duration(milliseconds: 100),
   });
 
   @override

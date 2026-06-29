@@ -12,7 +12,7 @@ class LocaleProvider extends ChangeNotifier {
 
   void setLocale(Locale locale) {
     if (!['en', 'ar'].contains(locale.languageCode)) return;
-    
+
     _locale = locale;
     _saveToPrefs(locale.languageCode);
     notifyListeners();

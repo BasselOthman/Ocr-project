@@ -1,7 +1,5 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import '../../features/common/app_colors.dart';
 import '../../routes/app_routes.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import '../../l10n/app_localizations.dart';
@@ -17,7 +15,9 @@ class UserHomeScreen extends StatefulWidget {
 class _UserHomeScreenState extends State<UserHomeScreen> {
   String _getUserName() {
     final user = FirebaseAuth.instance.currentUser;
-    if (user != null && user.displayName != null && user.displayName!.isNotEmpty) {
+    if (user != null &&
+        user.displayName != null &&
+        user.displayName!.isNotEmpty) {
       return user.displayName!;
     }
     // Fallback if displayName is missing
@@ -30,48 +30,66 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
   @override
   Widget build(BuildContext context) {
     final userName = _getUserName();
-    
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+    final textColor = theme.textTheme.bodyLarge?.color ?? Colors.black;
+    final hintColor = textColor.withValues(alpha: 0.6);
+
     // Get formatted date
     final now = DateTime.now();
-    final months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    final months = [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
+    ];
     final dateString = '${now.day} ${months[now.month - 1]}, ${now.year}';
 
     return Scaffold(
-      extendBodyBehindAppBar: true,
+      extendBodyBehindAppBar: false,
+      backgroundColor: Colors.transparent,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
         centerTitle: true,
-        title: const Text(
-          'DIAGKNOWSYS', 
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, letterSpacing: 2, fontSize: 20)
+        title: Text(
+          'DIAGKNOWSYS',
+          style: TextStyle(
+            color: textColor,
+            fontWeight: FontWeight.bold,
+            letterSpacing: 2,
+            fontSize: 20,
+          ),
         ),
         leading: IconButton(
-          icon: const Icon(Icons.person_rounded, color: Colors.white),
-          onPressed: () => Navigator.pushNamed(context, AppRoutes.clientProfile),
+          icon: Icon(Icons.person_rounded, color: textColor),
+          onPressed: () =>
+              Navigator.pushNamed(context, AppRoutes.clientProfile),
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.notifications_none_rounded, color: Colors.white),
-            onPressed: () => Navigator.pushNamed(context, AppRoutes.clientNotifications),
+            icon: Icon(Icons.notifications_none_rounded, color: textColor),
+            onPressed: () =>
+                Navigator.pushNamed(context, AppRoutes.clientNotifications),
           ),
           const SizedBox(width: 8),
         ],
       ),
       body: Stack(
         children: [
-          // Dynamic Header Background
-          Container(
-            width: double.infinity,
-            height: double.infinity,
-            decoration: const BoxDecoration(
-              gradient: AppColors.meshGradient,
-            ),
-          ),
-          
           SafeArea(
             child: SingleChildScrollView(
-              padding: const EdgeInsets.only(bottom: 100), // padding for the bottom nav bar
+              padding: const EdgeInsets.only(
+                bottom: 100,
+              ), // padding for the bottom nav bar
               child: Padding(
                 padding: const EdgeInsets.all(24.0),
                 child: Column(
@@ -81,32 +99,42 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                     // Greeting Header
                     Text(
                       AppLocalizations.of(context)!.hello,
-                      style: const TextStyle(color: Colors.white70, fontSize: 18),
+                      style: TextStyle(color: hintColor, fontSize: 18),
                     ).animate().fade(duration: 400.ms).slideY(begin: -0.2),
-                    
+
                     Text(
                       userName,
-                      style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 34,
-                          fontWeight: FontWeight.bold,
-                          letterSpacing: 0.5),
+                      style: TextStyle(
+                        color: textColor,
+                        fontSize: 34,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 0.5,
+                      ),
                     ).animate().fade(duration: 500.ms).slideY(begin: -0.2),
 
                     const SizedBox(height: 40),
 
                     // Simple clean date card
                     GlassCard(
-                      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 30),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 24,
+                        vertical: 30,
+                      ),
                       child: Row(
                         children: [
                           Container(
                             padding: const EdgeInsets.all(16),
                             decoration: BoxDecoration(
-                              color: Colors.white.withValues(alpha: 0.2),
+                              color: theme.colorScheme.primary.withValues(
+                                alpha: 0.1,
+                              ),
                               shape: BoxShape.circle,
                             ),
-                            child: const Icon(Icons.calendar_today_rounded, color: Colors.white, size: 32),
+                            child: Icon(
+                              Icons.calendar_today_rounded,
+                              color: theme.colorScheme.primary,
+                              size: 32,
+                            ),
                           ),
                           const SizedBox(width: 20),
                           Expanded(
@@ -115,16 +143,23 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                               children: [
                                 Text(
                                   AppLocalizations.of(context)!.today,
-                                  style: const TextStyle(color: Colors.white70, fontSize: 14),
+                                  style: TextStyle(
+                                    color: hintColor,
+                                    fontSize: 14,
+                                  ),
                                 ),
                                 const SizedBox(height: 4),
                                 Text(
                                   dateString,
-                                  style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 22),
+                                  style: TextStyle(
+                                    color: textColor,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 22,
+                                  ),
                                 ),
                               ],
                             ),
-                          )
+                          ),
                         ],
                       ),
                     ).animate().fade(duration: 600.ms).slideX(begin: 0.1),
@@ -136,28 +171,37 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(Icons.health_and_safety_outlined, size: 60, color: Colors.white.withValues(alpha: 0.4)),
+                          Icon(
+                            Icons.health_and_safety_outlined,
+                            size: 60,
+                            color: theme.colorScheme.primary.withValues(
+                              alpha: 0.4,
+                            ),
+                          ),
                           const SizedBox(height: 16),
                           Text(
                             AppLocalizations.of(context)!.readyToCheckHealth,
-                            style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                              color: textColor,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                           const SizedBox(height: 8),
                           Text(
                             AppLocalizations.of(context)!.tapPlusToScan,
-                            style: TextStyle(color: Colors.white.withValues(alpha: 0.7), fontSize: 14),
+                            style: TextStyle(color: hintColor, fontSize: 14),
                           ),
                         ],
                       ),
                     ).animate().fade(duration: 700.ms).scale(),
-
                   ],
                 ),
               ),
             ),
           ),
-        ]
-      )
+        ],
+      ),
     );
   }
 }

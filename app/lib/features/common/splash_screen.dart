@@ -28,9 +28,19 @@ class _SplashScreenState extends State<SplashScreen> {
           children: const [
             Icon(Icons.health_and_safety, size: 88, color: Colors.white),
             SizedBox(height: 16),
-            Text('LabSense', style: TextStyle(color: Colors.white, fontSize: 26, fontWeight: FontWeight.bold)),
+            Text(
+              'LabSense',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 26,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
             SizedBox(height: 8),
-            Text('AI-based Lab Results', style: TextStyle(color: Colors.white70)),
+            Text(
+              'AI-based Lab Results',
+              style: TextStyle(color: Colors.white70),
+            ),
           ],
         ),
       ),

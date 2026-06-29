@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 // ================= AUTH =================
 import 'package:gp_app/features/auth/auth_screen.dart';
+import 'package:gp_app/features/auth/doctor_register_screen.dart';
 
 // ================= CLIENT =================
-import 'package:gp_app/features/user/user_home_screen.dart';
 import 'package:gp_app/features/user/user_profile_screen.dart';
 import 'package:gp_app/features/user/upload_report_screen.dart';
 import 'package:gp_app/features/user/report_analysis_screen.dart';
@@ -14,10 +14,11 @@ import 'package:gp_app/features/user/account_settings_screen.dart';
 import 'package:gp_app/features/user/client_main_layout.dart';
 import 'package:gp_app/features/user/security_settings_screen.dart';
 
-import '../../features/doctor/doctor_home_screen.dart'; 
+import '../../features/doctor/doctor_main_layout.dart';
 import '../../features/doctor/doctor_profile_screen.dart';
 import '../../features/doctor/doctor_ratings_screen.dart';
 import '../../features/doctor/doctor_contact_screen.dart';
+import '../../features/doctor/patient_review_screen.dart';
 
 class DoctorContactScreen extends StatefulWidget {
   const DoctorContactScreen({super.key});
@@ -63,10 +64,10 @@ class _DoctorContactScreenState extends State<DoctorContactScreen> {
   }
 }
 
-
 class AppRoutes {
   // ========== AUTH ==========
   static const String auth = '/';
+  static const String doctorRegister = '/auth/doctor_register';
 
   // ========== CLIENT ==========
   static const String clientHome = '/client/home';
@@ -84,17 +85,18 @@ class AppRoutes {
   static const String doctorProfile = '/doctor/profile';
   static const String doctorRatings = '/doctor/ratings';
   static const String doctorContact = '/doctor/contact';
-
+  static const String patientReview = '/doctor/patient_review';
 
   // ================= ROUTES MAP =================
   static Map<String, WidgetBuilder> routes() {
     return {
       // ---------- AUTH ----------
       auth: (context) => const AuthScreen(),
+      doctorRegister: (context) => const DoctorRegisterScreen(),
 
       // ---------- CLIENT ----------
       // Standardizing names based on your imports
-      clientHome: (context) => const ClientMainLayout(), 
+      clientHome: (context) => const ClientMainLayout(),
       clientProfile: (context) => const ProfileScreen(),
       uploadReport: (context) => const UploadScreen(),
       reportAnalysis: (context) => const ReportAnalysis(),
@@ -103,11 +105,12 @@ class AppRoutes {
       clientAccount: (context) => const AccountSettingsScreen(),
       clientSecurity: (context) => const SecuritySettingsScreen(),
 
-      // ---------- DOCTOR ----------    
-      doctorHome: (context) => const DoctorHomeScreen(),
+      // ---------- DOCTOR ----------
+      doctorHome: (context) => const DoctorMainLayout(),
       doctorProfile: (context) => const DoctorProfileScreen(),
       doctorRatings: (context) => const DoctorRatingsScreen(),
       doctorContact: (context) => const DoctorContact(),
-      };
+      patientReview: (context) => const PatientReviewScreen(),
+    };
   }
 }

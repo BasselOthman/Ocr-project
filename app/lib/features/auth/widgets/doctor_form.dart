@@ -17,9 +17,7 @@ class DoctorAuthForm extends StatelessWidget {
           TextField(
             decoration: InputDecoration(labelText: 'Medical License ID'),
           ),
-          TextField(
-            decoration: InputDecoration(labelText: 'Specialty'),
-          ),
+          TextField(decoration: InputDecoration(labelText: 'Specialty')),
           const SizedBox(height: 20),
           ElevatedButton(
             onPressed: () {

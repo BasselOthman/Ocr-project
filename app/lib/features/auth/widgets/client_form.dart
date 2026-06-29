@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 class ClientAuthForm extends StatelessWidget {
   const ClientAuthForm({super.key});
 

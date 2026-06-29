@@ -85,6 +85,12 @@
         "indirect bilirubin": "IBIL",
         "direct bilirubin": "DBIL",
         "total bilirubin": "TBIL",
-        "bilirubin total": "TBIL"
+        "bilirubin total": "TBIL",
+        "sodium": "NA",
+        "na": "NA",
+        "potassium": "K",
+        "k": "K",
+        "lipase": "LIPASE",
+        "amylase": "AMYLASE"
     }
 }

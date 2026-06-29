@@ -421,4 +421,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get dataLocalized => 'Data is localized on Firebase.';
+
+  @override
+  String get awaitingDoctorReview => 'Awaiting Doctor Review';
+
+  @override
+  String get aiAnalysisWarning =>
+      'This AI-generated analysis is preliminary and requires doctor validation. Please consult your physician for final medical decisions.';
 }

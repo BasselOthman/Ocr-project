@@ -6,15 +6,14 @@ import '../../l10n/app_localizations.dart';
 import '../../routes/app_routes.dart';
 import '../common/widgets/animated_scale_button.dart';
 
-class RegisterScreen extends StatefulWidget {
-  final VoidCallback onLoginTap;
-  const RegisterScreen({super.key, required this.onLoginTap});
+class DoctorRegisterScreen extends StatefulWidget {
+  const DoctorRegisterScreen({super.key});
 
   @override
-  State<RegisterScreen> createState() => _RegisterScreenState();
+  State<DoctorRegisterScreen> createState() => _DoctorRegisterScreenState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
+class _DoctorRegisterScreenState extends State<DoctorRegisterScreen> {
   final _formKey = GlobalKey<FormState>();
 
   final TextEditingController _nameController = TextEditingController();
@@ -23,6 +22,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController _confirmPasswordController =
       TextEditingController();
   final TextEditingController _ageController = TextEditingController();
+  final TextEditingController _licenseController = TextEditingController();
+  final TextEditingController _specialtyController = TextEditingController();
+  final List<String> _specialties = [
+    'Cardiology & Vascular Disease',
+    'Cardiology and Vascular Disease (Heart)',
+    'Diabetes & Endocrinology',
+    'Dietitian & Nutrition',
+    'Gastroenterology',
+    'Hematology',
+    'Hepatology',
+    'Internal Medicine',
+    'Nephrology',
+    'Nutrition',
+    'Obesity',
+  ];
+  String? _selectedSpecialty;
 
   bool _isLoading = false;
 
@@ -33,6 +48,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
     _confirmPasswordController.dispose();
     _nameController.dispose();
     _ageController.dispose();
+    _licenseController.dispose();
+    _specialtyController.dispose();
     super.dispose();
   }
 
@@ -63,15 +80,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 'name': _nameController.text.trim(),
                 'email': email,
                 'age': int.tryParse(_ageController.text.trim()) ?? 0,
-                'role': 'patient',
+                'role': 'doctor',
                 'createdAt': FieldValue.serverTimestamp(),
+                'licenseId': _licenseController.text.trim(),
+                'specialty': _selectedSpecialty ?? '',
               });
 
           await user.updateDisplayName(_nameController.text.trim());
         }
 
         if (!mounted) return;
-        Navigator.pushReplacementNamed(context, AppRoutes.clientHome);
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          AppRoutes.doctorHome,
+          (route) => false,
+        );
       } on FirebaseAuthException catch (e) {
         if (!mounted) return;
         _showErrorDialog(
@@ -189,6 +212,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
     return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor,
+      appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: textColor),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+      ),
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
@@ -196,7 +225,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             child: Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: 24.0,
-                vertical: 24.0,
+                vertical: 8.0,
               ),
               child: Form(
                 key: _formKey,
@@ -206,7 +235,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   children: [
                     // Header Text
                     Text(
-                          AppLocalizations.of(context)!.createAccount,
+                          "Doctor Registration",
                           style: TextStyle(
                             fontSize: 34,
                             fontWeight: FontWeight.bold,
@@ -222,7 +251,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     const SizedBox(height: 8),
 
                     Text(
-                          AppLocalizations.of(context)!.joinUsToOrganize,
+                          "Join us as a medical professional",
                           style: TextStyle(fontSize: 16, color: hintColor),
                           textAlign: TextAlign.center,
                         )
@@ -255,6 +284,64 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ).animate().fade(duration: 800.ms, delay: 400.ms).slideX(),
                     const SizedBox(height: 12),
 
+                    // License
+                    _buildInput(
+                      controller: _licenseController,
+                      labelText: AppLocalizations.of(context)!.medicalLicenseId,
+                      prefixIcon: Icons.badge_outlined,
+                      validator: (value) => value!.isEmpty
+                          ? AppLocalizations.of(context)!.licenseIdRequired
+                          : null,
+                    ).animate().fade(duration: 800.ms, delay: 450.ms).slideX(),
+                    const SizedBox(height: 12),
+
+                    // Specialty
+                    Container(
+                      decoration: BoxDecoration(
+                        color: theme.brightness == Brightness.dark
+                            ? Colors.white.withValues(alpha: 0.05)
+                            : Colors.black.withValues(alpha: 0.05),
+                        borderRadius: BorderRadius.circular(16),
+                        border: Border.all(
+                          color: theme.brightness == Brightness.dark
+                              ? Colors.white.withValues(alpha: 0.1)
+                              : Colors.black.withValues(alpha: 0.1),
+                        ),
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 4,
+                      ),
+                      child: DropdownButtonFormField<String>(
+                        isExpanded: true,
+                        dropdownColor: theme.scaffoldBackgroundColor,
+                        decoration: InputDecoration(
+                          labelText: AppLocalizations.of(context)!.specialty,
+                          labelStyle: TextStyle(color: hintColor),
+                          prefixIcon: Icon(
+                            Icons.local_hospital_outlined,
+                            color: hintColor,
+                          ),
+                          border: InputBorder.none,
+                          enabledBorder: InputBorder.none,
+                          focusedBorder: InputBorder.none,
+                        ),
+                        style: TextStyle(color: textColor),
+                        initialValue: _selectedSpecialty,
+                        items: _specialties
+                            .map(
+                              (s) => DropdownMenuItem(value: s, child: Text(s)),
+                            )
+                            .toList(),
+                        onChanged: (val) =>
+                            setState(() => _selectedSpecialty = val),
+                        validator: (value) => value == null
+                            ? AppLocalizations.of(context)!.specialtyRequired
+                            : null,
+                      ),
+                    ).animate().fade(duration: 800.ms, delay: 500.ms).slideX(),
+                    const SizedBox(height: 12),
+
                     // Email
                     _buildInput(
                       controller: _emailController,
@@ -272,7 +359,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         }
                         return null;
                       },
-                    ).animate().fade(duration: 800.ms, delay: 500.ms).slideX(),
+                    ).animate().fade(duration: 800.ms, delay: 550.ms).slideX(),
                     const SizedBox(height: 12),
 
                     // Password
@@ -307,7 +394,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         }
                         return null;
                       },
-                    ).animate().fade(duration: 800.ms, delay: 700.ms).slideX(),
+                    ).animate().fade(duration: 800.ms, delay: 650.ms).slideX(),
                     const SizedBox(height: 24),
 
                     // Action Button
@@ -332,7 +419,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   child: Text(
                                     AppLocalizations.of(
                                       context,
-                                    )!.registerAsPatient,
+                                    )!.registerAsDoctor,
                                     style: const TextStyle(
                                       color: Colors.white,
                                       fontSize: 16,
@@ -342,54 +429,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 ),
                               )
                               .animate()
-                              .fade(duration: 800.ms, delay: 800.ms)
+                              .fade(duration: 800.ms, delay: 700.ms)
                               .scale(),
-
-                    const SizedBox(height: 16),
-
-                    // Sign In
-                    Center(
-                      child: TextButton(
-                        onPressed: widget.onLoginTap,
-                        child: RichText(
-                          text: TextSpan(
-                            text: AppLocalizations.of(
-                              context,
-                            )!.alreadyHaveAccount,
-                            style: TextStyle(color: hintColor),
-                            children: [
-                              TextSpan(
-                                text:
-                                    " ${AppLocalizations.of(context)!.loginHere}",
-                                style: TextStyle(
-                                  color: theme.colorScheme.primary,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ).animate().fade(duration: 800.ms, delay: 900.ms),
-
-                    // Doctor Registration Link
-                    Center(
-                      child: TextButton(
-                        onPressed: () {
-                          Navigator.pushNamed(
-                            context,
-                            AppRoutes.doctorRegister,
-                          );
-                        },
-                        child: Text(
-                          "Are you a doctor? Click here",
-                          style: TextStyle(
-                            color: theme.colorScheme.primary,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ).animate().fade(duration: 800.ms, delay: 1000.ms),
+                    const SizedBox(height: 24),
                   ],
                 ),
               ),

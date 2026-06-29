@@ -44,8 +44,10 @@ class _RatingHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: const [
-        Text('4.8',
-            style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold)),
+        Text(
+          '4.8',
+          style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+        ),
         Text('Average Rating'),
       ],
     );

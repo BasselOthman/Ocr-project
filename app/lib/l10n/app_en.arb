@@ -136,5 +136,7 @@
   "sendPasswordReset": "Send Password Reset Email",
   "dataPrivacy": "Data Privacy",
   "dataSecured": "Your data is secured",
-  "dataLocalized": "Data is localized on Firebase."
+  "dataLocalized": "Data is localized on Firebase.",
+  "awaitingDoctorReview": "Awaiting Doctor Review",
+  "aiAnalysisWarning": "This AI-generated analysis is preliminary and requires doctor validation. Please consult your physician for final medical decisions."
 }

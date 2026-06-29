@@ -53,6 +53,11 @@ dependencies:
   google_fonts: ^6.2.1
   flutter_animate: ^4.5.0
   percent_indicator: ^3.4.0
+  pdf: ^3.12.0
+  printing: ^5.14.3
+  fl_chart: ^1.2.0
+  csv: ^5.0.2
+  url_launcher: ^6.3.0
 
 dev_dependencies:
   flutter_test:
@@ -79,7 +84,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
+  assets:
+    - assets/data/doctor_recommendation_FINAL.csv
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

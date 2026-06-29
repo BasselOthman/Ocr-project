@@ -421,4 +421,11 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get dataLocalized => 'البيانات مخزنة محلياً على فايربيس.';
+
+  @override
+  String get awaitingDoctorReview => 'في انتظار مراجعة الطبيب';
+
+  @override
+  String get aiAnalysisWarning =>
+      'هذا التحليل الصادر عن الذكاء الاصطناعي أولي ويتطلب تأكيد الطبيب. يرجى استشارة طبيبك لاتخاذ القرارات الطبية النهائية.';
 }
