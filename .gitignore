@@ -74,4 +74,6 @@ crash_utf8.txt
 *.log
 *.zip
 
-
+# Local test data
+backend/input/*.pdf
+CodeLink.txt
